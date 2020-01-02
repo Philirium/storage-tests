@@ -1,0 +1,552 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { of, from, Observable, observable } from 'rxjs';
+import { tap, map, catchError, timeInterval, retry, mergeAll } from 'rxjs/operators';
+import { nextTick } from 'q';
+import { throwError } from 'rxjs';
+import { Action } from 'rxjs/internal/scheduler/Action';
+import { logging } from 'protractor';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+
+  
+
+//   private source = of('any Object'); // of создает из любой переменной просто обзервбл!!!
+  
+//   subscription = this.source.pipe(
+//     map(source => source = source + ' --- and this is my MAP operator !!!')
+//   )
+//   .subscribe(source => console.log(source))
+  
+
+  
+//   private sourceMassive = from(['1', '2', '3']); // FROM  создает ИЗ МАССИВА обзервбл МАСИВ и прокидывает каждое значение в пайп !!!
+  
+//   subscriptionOnMassive = this.sourceMassive.pipe(
+//     map(source => source = source + ' --- and this is my FROM operator !!!')
+//   )
+//   .subscribe(source => console.log(source))
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//   private source2 = Observable.create((observer) => {
+//     let count = 0;
+//     console.log('Observable created');
+
+//     const timer = setInterval(() => {
+//         observer.next(count);
+//         count++;
+//     }, 1000);
+
+//     return () => {
+//         console.log('Observable destroyed');
+//         clearInterval(timer);
+//     }
+// });
+
+}
+
+
+
+// const source = Observable.create( (someValue) => { // someValue - становится ЗНАЧЕНИЕМ внутри обзервбл который мы ожидаем 
+//  setTimeout(() => {
+//    someValue.next({ 1:1, 2:2 } )
+//  }, 2000)
+
+ 
+
+//   console.log('Observable created');
+  
+
+// });
+
+// source.subscribe( arg => console.log(arg) )
+
+
+
+// const sourse = throwError
+
+// sourse.subscribe()
+
+
+// const source = Observable.create((observer) => {
+//   let count = 0;
+//   console.log('Observable created');
+
+//   const timer = setInterval(() => {
+//     observer.next(count);
+//     setTimeout( () => { observer.complete() }, 4000 )
+//     count++;
+      
+//   }, 1000);
+  
+//   return () => {
+      
+//       console.log('Observable destroyed');
+//       clearInterval(timer);
+//   }
+// });
+
+// const subscription = source.subscribe(
+//   val => console.log('next:', val),
+//   err => console.error('error:', err),
+//   () => console.log('completed')
+// );
+// // не забываем отписаваться
+// setTimeout(() => subscription.unsubscribe(), 6500);
+
+
+// const source = from([{1:'первый'}, {2:'второй'}, {3:'третий'}]);
+
+// source.subscribe(arg => console.log(arg))
+
+
+// const sourse = throwError('damn! ')
+// sourse.subscribe()
+
+
+// import { catchError } from 'rxjs/operators';
+
+// const source = throwError('Damn');
+// let subscription = source.pipe(
+//     catchError(err => {
+//       console.log('catch:', err);
+//       return of('safety result');
+//     })
+//   )
+//   .subscribe(
+//     val => console.log('next:', val),
+//     err => console.error('error:', err),
+//     () => console.log('completed')
+//   );
+
+// const source = of({key:'info', data: [{},{},{}]})
+
+// source.pipe(
+//   tap(sourse => console.log(source)),
+//   catchError(a => {
+//     console.log('catch:', a);
+//     return of('safety result');
+//   })
+// ).subscribe(a => console.log(a))
+
+
+// const sourse = Observable.create(observer => {
+//   console.log('i try');
+// observer.error('i have mistake')
+
+//   }
+// )
+
+// sourse.pipe(
+  
+//   retry(5)
+// ).subscribe(a => console.log(a))
+
+
+// import { retryWhen } from 'rxjs/operators';
+
+// let flag = true; // устаовили переменнуб зарание 
+
+
+// let source = Observable.create(observer => { // создаем обзервер 
+//   console.log('Fake server call');
+//   if (flag) {
+//     observer.error('Damn'); // сейчас наш флаг тру, срабатывает эрор
+//     flag = false; // рубится на фолсе 
+//   } else {
+//     observer.next('success');
+//   }
+// });
+// let obs = new Observable(observer => { // хуярится новый обзервбл 
+//   console.log('let wait a second');
+//   setTimeout(() => observer.next('any'), 1000);
+// });
+// let subscription = source.pipe(
+//     retryWhen(e$ => obs) 
+//   )
+//   .subscribe( val => console.log('next:', val) );
+
+
+
+ // наши данные:
+//  const data = of([
+//    {
+//      brand: 'porsche',
+//      model: '911'
+//    },
+//    {
+//      brand: 'porsche',
+//      model: 'macan'
+//    },
+//    {
+//      brand: 'ferarri',
+//      model: '458'
+//    },
+//    {
+//      brand: 'lamborghini',
+//      model: 'urus'
+//    }
+//  ]);
+
+
+//  data
+//     .pipe(
+//       map(cars => cars.filter(car => car.brand === 'porsche'))
+//  ).subscribe(a => console.log(a))
+
+
+
+
+//  const data2 = of([
+//   {
+//     brand: 'porsche',
+//     model: '911'
+//   },
+//   {
+//     brand: 'porsche',
+//     model: 'macan'
+//   },
+//   {
+//     brand: 'ferarri',
+//     model: '458'
+//   },
+//   {
+//     brand: 'lamborghini',
+//     model: 'urus'
+//   }
+// ]);
+
+
+// data2
+//   .pipe(
+//     map(cars => cars.filter(car => car.brand === 'porsche'))
+// ).subscribe(cars => console.log(cars))
+
+// // получим данные как строку вида brand+model. Итог:
+// // ["porsche 911", "porsche macan", "ferarri 458", "lamborghini urus"]
+// data
+//   .pipe(
+//     map(cars => console.log(cars.map(a => {})))
+// ).subscribe(cars => console.log(cars))
+
+//const data = of( [  {a:1, b:2 }, {a:1, b:2 }, {a:1, b:2 }, {a:1, b:2 }, {a:1, b:2 }, {a:1, b:2 }  ]  )
+
+
+//data.pipe(
+//  map(arg => arg)
+//).subscribe(data => console.log(data))
+
+// const getData = (param) => {
+//   return of(`возвращаю новый праметр после обработки ${param}`).pipe(
+//     delay(3000)
+//   )
+// }
+
+
+// const data = from([1,2,3,4])
+
+
+// data.pipe(
+//   mergeMap(dataElement => getData(dataElement)),
+  
+  
+
+// ).subscribe(a => console.log(a))
+
+// import { delay, mergeMap, switchMap} from 'rxjs/operators'
+// import { BehaviorSubject } from 'rxjs'
+
+
+// const filter = ['brand=porsche', 'model=911', 'horsepower=389', 'color=red'];
+
+// const activeFiltersSubject = new BehaviorSubject('') // хранит любое значение в Observible 
+
+// const getData = (params) => {
+//   return of(`новые даанные с парметрами ${params}`).pipe(
+//     delay(1000)
+//   )
+// };
+
+// const applyFilters = () => {
+//   filter.forEach((filter, index) => {
+    
+//     let newFilters = activeFiltersSubject.value; // дал пустое значение 
+//     if ( index === 0 ) {
+//       newFilters = `${filter}` // приравнял строку 'brand=porsche'
+//     } else {
+//       newFilters = `${newFilters}&${filter}` // пошел на второй заход к 
+//       // уже сохраненной строке 'brand=porsche' добавил строку 'model=911'\
+//       // что бы получилось brand=porsche&model=911 и т.д.
+//     }
+
+//     activeFiltersSubject.next(newFilters)
+
+//   }) // форыч перебирает каждый элемент масива В ПЕРВОМ АРГУМЕНТЕ "значние" ВО ВТОРОМ "индекс"
+// }
+
+// setTimeout( ()=>{ 
+//   applyFilters()
+// }, 2000)
+
+// activeFiltersSubject.pipe(
+//   switchMap(param => getData(param)),
+//   delay(1000)
+  
+  
+// ).subscribe(val => console.log(val))
+
+//?  brand=porsche && model=911 && horsepower=389 && color=red
+
+
+
+// export interface AccountState  {
+//   logging: boolean;
+//   logged: boolean;
+//   error: boolean;
+
+//   brand: string[];
+//   roles: string[];
+//   user_id: string[];
+
+//   id: string;
+//   firstname: string;
+//   lastname: string;
+//   middlename: string;
+//   sex: string;
+//   birthday: string;
+//   workPhone: string;
+//   privatePhone: string;
+//   workEmail: string;
+//   privateEmail: string;
+ 
+//   targetGroup: string;
+//   status: string;
+
+
+
+
+//   loaders: {
+//     collegues: boolean,
+//     vassals: boolean,
+//   };
+// }
+
+// export const initialState: AccountState = {
+//   logging: false,
+//   logged: false,
+//   error: false,
+
+//   brand: null,
+//   roles: null,
+//   user_id: null,
+
+//   id: null,
+//   firstname: null,
+//   lastname: null,
+//   middlename: null,
+//   sex: null,
+//   birthday: null,
+//   workPhone: null,
+//   privatePhone: null,
+//   workEmail: null,
+//   privateEmail: null,
+
+//   targetGroup: null,
+//   status: null,
+
+//   loaders: {
+//     collegues: false,
+//     vassals: false,
+//   }
+// };
+
+
+
+
+
+// function acountReducer(
+//   state = initialState
+// )  {
+  
+
+//   switch (true) {
+
+//     case true: {
+//       return {
+//         ...state,
+//         logging: true,
+//       };
+//     }
+
+// }}
+// console.log(initialState)
+// console.log(acountReducer())
+
+
+
+
+
+
+// function acountReducer2( 
+//   state = {a:1, b:2, c:3}
+// ) {
+
+//   return {...state} 
+    
+  
+
+
+// }
+
+
+// console.log(acountReducer2())
+
+// let a = { ...{kill:'string '}, kill:2  }
+// console.log(a )
+
+
+// let b = {
+//   1:'string',
+//   ...{ key: 'shit', anotherKey: 'shit', anotherKey2: 'shit' }, key:'noSHIT' 
+  
+// }
+
+// console.log('aaaaaaaaaaa', b)
+
+
+
+// console.log(document.getElementById('safa'), 'я элемент')
+
+interface someType {
+  title: string;
+  massive:any[]
+}
+
+const obj: someType = {
+        title:'lol', 
+        massive:
+        [ 
+          {key:1,group: "3",data:[ {index:9},{index:8},{index:7},{index:5},{index:4},{index:1}]},
+          {key:1,group: "3",data:[ {index:9},{index:8},{index:7},]},
+          {key:1,group: "3",data:[ ]},
+          {key:2,group: "3",data:[ ]},
+          {key:2,group: "3",data:[ ]},
+          {key:3,group: "3",data:[ ]}
+        ]
+      }
+
+
+function name( obj: someType ) : someType{
+  let i = 0;
+  while (obj.massive.length > i) { 
+    return{
+          title: 'lol',
+          massive: _.orderBy(
+            
+            
+            
+            obj.massive[i].data,['index'], ['asc'])
+          
+              
+            
+            
+            
+            
+            
+           
+        }
+      }
+  
+}
+
+console.log(name(obj))
+
+
+import * as _ from 'lodash';
+import { Title } from '@angular/platform-browser';
+
+const setEducation = (data: UserEducation): UserEducation => { 
+  
+    
+  for (let i = 0; data.data.length < i; i++){
+      
+    let a = { ...data.data[i],
+       
+      data: _.orderBy(data.data[i].data,['group'])
+    };
+        
+    
+    
+  
+    
+  }
+  return data
+};
+
+
+
+export interface UserEducation {
+  title: string;
+  data: Array<{
+    title: string,
+    data: Array<{
+      group: string,
+      index: number,
+      label: string,
+      value: string
+    }>
+  }>;
+}
+
+
+
+// const education$: UserEducation = {
+
+//   title: undefined,
+
+//   data: [{
+//     title: "Высшее образование",
+//     data: [
+//             {group: "3", index: 1, label: "Дата начала", value: "07.06.2012"},
+//             {group: "3", index: 2, label: "Дата окончания", value: "31.12.9999"},
+//             {group: "3", index: 3, label: "Форма образования", value: "Очное"},
+//             {group: "3", index: 4, label: "Квалификация", value: "Инженер"},
+//             {group: "3", index: 5, label: "Специальность", value: "ВЫЧИСЛИТЕЛЬНЫЕ МАШИНЫ, КОМПЛЕКСЫ, СИСТЕМЫ И СЕТИ."},
+//             {group: "3", index: 6, label: "Название уч. заведения", value: ""},
+// ]
+// },
+// {
+//   title: "срднее образование",
+//   data: [
+//           {group: "2", index: 1, label: "Дата начала", value: "07.06.2012"},
+//           {group: "2", index: 2, label: "Дата окончания", value: "31.12.9999"},
+//           {group: "2", index: 3, label: "Форма образования", value: "Очное"},
+//           {group: "2", index: 4, label: "Квалификация", value: "Инженер"},
+//           {group: "2", index: 5, label: "Специальность", value: "ВЫЧИСЛИТЕЛЬНЫЕ МАШИНЫ, КОМПЛЕКСЫ, СИСТЕМЫ И СЕТИ."},
+//           {group: "2", index: 6, label: "Название уч. заведения", value: ""},
+// ]
+// },
+// {
+//   title: "ssss образование",
+//   data: [
+//           {group: "5", index: 1, label: "Дата начала", value: "07.06.2012"},
+//           {group: "5", index: 2, label: "Дата окончания", value: "31.12.9999"},
+//           {group: "5", index: 3, label: "Форма образования", value: "Очное"},
+//           {group: "5", index: 4, label: "Квалификация", value: "Инженер"},
+//           {group: "5", index: 5, label: "Специальность", value: "ВЫЧИСЛИТЕЛЬНЫЕ МАШИНЫ, КОМПЛЕКСЫ, СИСТЕМЫ И СЕТИ."},
+//           {group: "5", index: 6, label: "Название уч. заведения", value: ""},
+// ]
+// },
+  
+
+
+//]}
+
+//console.log(setEducation(education$))
+//console.log(education$)
